@@ -1,4 +1,4 @@
-# my_first_flutter_app
+# Sneakr App
 
 A new Flutter project.
 
