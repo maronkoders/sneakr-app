@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:my_first_flutter_app/dashboard/categoriesScreen.dart';
 import 'dashboard/landingPage.dart';
+import './dashboard/settings.dart';
+import './dashboard/products.dart';
+import './dashboard/sales.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -12,6 +17,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Login',
+      routes: {
+        '/dashboard': (context) => DashboardPage(),
+        '/settings': (context) => settings(),
+        '/products': (context) => ProductsScreen(),
+        '/categories': (context) => categoriesScreen(),
+        '/sales': (context) => sales(),
+      },
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
@@ -28,7 +40,6 @@ class Login extends StatefulWidget {
   @override
   State<Login> createState() => _LoginState();
 }
-
 
 class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
@@ -86,7 +97,11 @@ class _LoginState extends State<Login> {
                   child: ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        landingPage();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DashboardPage()),
+                        );
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('Please fill input')),
