@@ -2,40 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:data_table_2/data_table_2.dart';
 
 class Product {
-  final String id;
   final String name;
-  final double buying_price;
-  final double selling_price;
-  final int stock;
+  final String surname;
+  final String email;
+  final String role;
 
   Product(
-      {required this.id,
-      required this.name,
-      required this.buying_price,
-      required this.selling_price,
-      required this.stock});
+      {required this.name,
+      required this.surname,
+      required this.email,
+      required this.role});
 }
 
-class ProductsScreen extends StatelessWidget {
+class usersScreen extends StatelessWidget {
   final List<Product> products = [
     Product(
-        id: '001',
-        name: 'Sneaker A',
-        buying_price: 120.0,
-        selling_price: 120.0,
-        stock: 15),
+        name: 'Munya',
+        surname: 'Munhu',
+        email: 'munhu@gmail.com',
+        role: 'Attendant'),
     Product(
-        id: '002',
-        name: 'Sneaker B',
-        buying_price: 150.0,
-        selling_price: 120.0,
-        stock: 20),
+        name: 'Romeo',
+        surname: 'Musi',
+        email: 'munhu@gmail.com',
+        role: 'Administrator'),
     Product(
-        id: '003',
-        name: 'Sneaker C',
-        buying_price: 180.0,
-        selling_price: 120.0,
-        stock: 5),
+        name: 'Munya',
+        surname: 'Munhu',
+        email: 'munhu@gmail.com',
+        role: 'Attendant'),
     // Add more products as needed
   ];
 
@@ -43,7 +38,7 @@ class ProductsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Products'),
+        title: Text('Users'),
         actions: <Widget>[
           IconButton(
               icon: Icon(Icons.add),
@@ -61,10 +56,6 @@ class ProductsScreen extends StatelessWidget {
         horizontalMargin: 12,
         minWidth: 600,
         columns: [
-          DataColumn2(
-            label: Text('ID'),
-            size: ColumnSize.L,
-          ),
           DataColumn(
             label: Text('Name'),
             onSort: (columnIndex, ascending) {
@@ -74,43 +65,40 @@ class ProductsScreen extends StatelessWidget {
             },
           ),
           DataColumn(
-            label: Text('Buying Price'),
+            label: Text('Surname'),
             numeric: true,
             onSort: (columnIndex, ascending) {
               products.sort((a, b) => ascending
-                  ? a.buying_price.compareTo(b.buying_price)
-                  : b.buying_price.compareTo(a.buying_price));
+                  ? a.surname.compareTo(b.surname)
+                  : b.surname.compareTo(a.surname));
             },
           ),
           DataColumn(
-            label: Text('Selling Price'),
+            label: Text('Email'),
             numeric: true,
             onSort: (columnIndex, ascending) {
               products.sort((a, b) => ascending
-                  ? a.selling_price.compareTo(b.selling_price)
-                  : b.selling_price.compareTo(a.selling_price));
+                  ? a.surname.compareTo(b.surname)
+                  : b.surname.compareTo(a.surname));
             },
           ),
           DataColumn(
-            label: Text('Stock'),
+            label: Text('Role'),
             numeric: true,
             onSort: (columnIndex, ascending) {
               products.sort((a, b) => ascending
-                  ? a.stock.compareTo(b.stock)
-                  : b.stock.compareTo(a.stock));
+                  ? a.role.compareTo(b.role)
+                  : b.role.compareTo(a.role));
             },
           ),
         ],
         rows: products
             .map((product) => DataRow(
                   cells: [
-                    DataCell(Text(product.id)),
                     DataCell(Text(product.name)),
-                    DataCell(
-                        Text('\$${product.buying_price.toStringAsFixed(2)}')),
-                    DataCell(
-                        Text('\$${product.selling_price.toStringAsFixed(2)}')),
-                    DataCell(Text(product.stock.toString())),
+                    DataCell(Text(product.surname)),
+                    DataCell(Text(product.email)),
+                    DataCell(Text(product.role)),
                   ],
                 ))
             .toList(),
@@ -143,13 +131,27 @@ class ProductsScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 10),
-              DropdownButtonFormField<String>(
+              TextFormField(
                 decoration: InputDecoration(
-                  labelText: 'Select Categories',
+                  labelText: 'Surname',
                   border: OutlineInputBorder(),
                 ),
-                items: <String>['Category 1', 'Category 2', 'Category 3']
-                    .map((String value) {
+              ),
+              SizedBox(height: 10),
+              TextFormField(
+                decoration: InputDecoration(
+                  labelText: 'Email',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              SizedBox(height: 10),
+              DropdownButtonFormField<String>(
+                decoration: InputDecoration(
+                  labelText: 'Select Role',
+                  border: OutlineInputBorder(),
+                ),
+                items:
+                    <String>['Attendant', 'Administrator'].map((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
                     child: Text(value),
@@ -158,52 +160,22 @@ class ProductsScreen extends StatelessWidget {
                 onChanged: (_) {},
               ),
               SizedBox(height: 10),
-              DropdownButtonFormField<String>(
+              TextFormField(
                 decoration: InputDecoration(
-                  labelText: 'Select Sizes',
+                  labelText: 'Password',
                   border: OutlineInputBorder(),
                 ),
-                items: <String>['Small', 'Medium', 'Large'].map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-                onChanged: (_) {},
+                obscureText: true,
               ),
               SizedBox(height: 10),
               TextFormField(
                 decoration: InputDecoration(
-                  labelText: 'Buying Price',
+                  labelText: 'Confirm Password',
                   border: OutlineInputBorder(),
                 ),
-                keyboardType: TextInputType.number,
+                obscureText: true,
               ),
               SizedBox(height: 10),
-              TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Selling Price',
-                  border: OutlineInputBorder(),
-                ),
-                keyboardType: TextInputType.number,
-              ),
-              SizedBox(height: 10),
-              TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Quantity',
-                  border: OutlineInputBorder(),
-                ),
-                keyboardType: TextInputType.number,
-              ),
-              SizedBox(height: 10),
-              TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Description',
-                  border: OutlineInputBorder(),
-                ),
-                maxLines: 3,
-              ),
-              SizedBox(height: 20),
               ElevatedButton(
                 child: Text('Save'),
                 onPressed: () {

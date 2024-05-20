@@ -37,7 +37,7 @@ class DashboardPage extends StatelessWidget {
               ),
             ),
             ListTile(
-              leading: Icon(Icons.home),
+              leading: Icon(Icons.dashboard),
               title: Text('Dashboard'),
               onTap: () {
                 Navigator.pop(context); // Close the drawer
@@ -59,7 +59,7 @@ class DashboardPage extends StatelessWidget {
                 ),
                 ListTile(
                   leading: Icon(Icons.list),
-                  title: Text('All Sneakers'),
+                  title: Text('All Products'),
                   onTap: () {
                     Navigator.pop(context); // Close the drawer
                     Navigator.pushNamed(context, '/products');
@@ -76,13 +76,38 @@ class DashboardPage extends StatelessWidget {
                 Navigator.pushNamed(context, '/sales');
               },
             ),
-            ListTile(
+            ExpansionTile(
               leading: Icon(Icons.settings),
               title: Text('Settings'),
-              onTap: () {
-                Navigator.pop(context); // Close the drawer
-                Navigator.pushNamed(context, '/settings'); // Navigate to Home
-              },
+              children: <Widget>[
+                ListTile(
+                  leading: Icon(Icons.list),
+                  title: Text('Users'),
+                  onTap: () {
+                    Navigator.pop(context); // Close the drawer
+                    Navigator.pushNamed(context, '/users');
+                    // Navigate to security settings
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.list),
+                  title: Text('Roles'),
+                  onTap: () {
+                    Navigator.pop(context); // Close the drawer
+                    Navigator.pushNamed(context, '/roles');
+                    // Navigate to display settings
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.account_circle),
+                  title: Text('Profile'),
+                  onTap: () {
+                    Navigator.pop(context); // Close the drawer
+                    Navigator.pushNamed(context, '/settings');
+                    // Navigate to display settings
+                  },
+                ),
+              ],
             ),
           ],
         ),

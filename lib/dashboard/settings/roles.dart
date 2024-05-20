@@ -4,38 +4,21 @@ import 'package:data_table_2/data_table_2.dart';
 class Product {
   final String id;
   final String name;
-  final double buying_price;
-  final double selling_price;
+  final double price;
   final int stock;
 
   Product(
       {required this.id,
       required this.name,
-      required this.buying_price,
-      required this.selling_price,
+      required this.price,
       required this.stock});
 }
 
-class ProductsScreen extends StatelessWidget {
+class rolesScreen extends StatelessWidget {
   final List<Product> products = [
-    Product(
-        id: '001',
-        name: 'Sneaker A',
-        buying_price: 120.0,
-        selling_price: 120.0,
-        stock: 15),
-    Product(
-        id: '002',
-        name: 'Sneaker B',
-        buying_price: 150.0,
-        selling_price: 120.0,
-        stock: 20),
-    Product(
-        id: '003',
-        name: 'Sneaker C',
-        buying_price: 180.0,
-        selling_price: 120.0,
-        stock: 5),
+    Product(id: '001', name: 'Sneaker A', price: 120.0, stock: 15),
+    Product(id: '002', name: 'Sneaker B', price: 150.0, stock: 20),
+    Product(id: '003', name: 'Sneaker C', price: 180.0, stock: 5),
     // Add more products as needed
   ];
 
@@ -43,7 +26,7 @@ class ProductsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Products'),
+        title: Text('Roles'),
         actions: <Widget>[
           IconButton(
               icon: Icon(Icons.add),
@@ -74,21 +57,12 @@ class ProductsScreen extends StatelessWidget {
             },
           ),
           DataColumn(
-            label: Text('Buying Price'),
+            label: Text('Price'),
             numeric: true,
             onSort: (columnIndex, ascending) {
               products.sort((a, b) => ascending
-                  ? a.buying_price.compareTo(b.buying_price)
-                  : b.buying_price.compareTo(a.buying_price));
-            },
-          ),
-          DataColumn(
-            label: Text('Selling Price'),
-            numeric: true,
-            onSort: (columnIndex, ascending) {
-              products.sort((a, b) => ascending
-                  ? a.selling_price.compareTo(b.selling_price)
-                  : b.selling_price.compareTo(a.selling_price));
+                  ? a.price.compareTo(b.price)
+                  : b.price.compareTo(a.price));
             },
           ),
           DataColumn(
@@ -106,10 +80,7 @@ class ProductsScreen extends StatelessWidget {
                   cells: [
                     DataCell(Text(product.id)),
                     DataCell(Text(product.name)),
-                    DataCell(
-                        Text('\$${product.buying_price.toStringAsFixed(2)}')),
-                    DataCell(
-                        Text('\$${product.selling_price.toStringAsFixed(2)}')),
+                    DataCell(Text('\$${product.price.toStringAsFixed(2)}')),
                     DataCell(Text(product.stock.toString())),
                   ],
                 ))
@@ -174,15 +145,7 @@ class ProductsScreen extends StatelessWidget {
               SizedBox(height: 10),
               TextFormField(
                 decoration: InputDecoration(
-                  labelText: 'Buying Price',
-                  border: OutlineInputBorder(),
-                ),
-                keyboardType: TextInputType.number,
-              ),
-              SizedBox(height: 10),
-              TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Selling Price',
+                  labelText: 'Price',
                   border: OutlineInputBorder(),
                 ),
                 keyboardType: TextInputType.number,

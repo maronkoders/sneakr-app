@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:my_first_flutter_app/dashboard/categoriesScreen.dart';
-import 'dashboard/landingPage.dart';
-import './dashboard/settings.dart';
+import './dashboard/categoriesScreen.dart';
+import './dashboard/settings/roles.dart';
+import './dashboard/settings/users.dart';
+import './dashboard/landingPage.dart';
+import './dashboard/settings/settings.dart';
 import './dashboard/products.dart';
-import './dashboard/sales.dart';
+import 'dashboard/sales/sales.dart';
 
-void main() {
+
+void main() async {
   runApp(const MyApp());
 }
 
@@ -23,6 +26,8 @@ class MyApp extends StatelessWidget {
         '/products': (context) => ProductsScreen(),
         '/categories': (context) => categoriesScreen(),
         '/sales': (context) => sales(),
+        '/users': (context) => usersScreen(),
+        '/roles': (context) => rolesScreen(),
       },
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
