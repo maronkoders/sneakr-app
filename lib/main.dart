@@ -7,8 +7,8 @@ import './dashboard/settings/settings.dart';
 import './dashboard/products.dart';
 import 'dashboard/sales/sales.dart';
 
-
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         '/products': (context) => ProductsScreen(),
         '/categories': (context) => categoriesScreen(),
         '/sales': (context) => sales(),
-        '/users': (context) => usersScreen(),
+        '/users': (context) => UsersScreen(),
         '/roles': (context) => rolesScreen(),
       },
       theme: ThemeData(
